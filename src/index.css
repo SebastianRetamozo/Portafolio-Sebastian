@@ -3,13 +3,55 @@
 @tailwind utilities;
 
 :root {
+  --background: #000000;
+  --on-background: #ffffff;
+  --surface-container: #121212;
+  --on-surface-variant: #a1a1aa;
+  --primary: #c4c0ff;
+  --on-primary: #000000;
+  --secondary: #8b5cf6;
+  --border: rgba(255, 255, 255, 0.1);
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --background: #f8fafc;
+  --on-background: #0f172a;
+  --surface-container: #ffffff;
+  --on-surface-variant: #475569;
+  --primary: #4f46e5;
+  --on-primary: #ffffff;
+  --secondary: #7c3aed;
+  --border: rgba(15, 23, 42, 0.08);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  color-scheme: light;
+}
+
+/* Global Theme Utilities */
+.text-main { color: var(--on-background); }
+.text-dim { color: var(--on-surface-variant); }
+.bg-page { background-color: var(--background); }
+.bg-card { background-color: var(--surface-container); }
+.border-main { border-color: var(--border); }
+
 body {
-  @apply bg-background text-on-background font-body;
-  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--on-background);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+}
+
+/* Custom Noise Overlay - less opacity in light mode */
+[data-theme="light"] .noise-overlay {
+  opacity: 0.015;
+}
+
+/* Theme-aware grid lines */
+.grid-lines {
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* Custom Noise Overlay */
@@ -36,9 +78,13 @@ body {
   @apply opacity-100 translate-y-0 blur-0;
 }
 
-/* Gradient text */
+/* Gradient text - Theme aware */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-secondary;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#a198ff] to-secondary;
+}
+
+[data-theme="light"] .text-gradient {
+  @apply bg-gradient-to-r from-primary via-secondary to-primary;
 }
 
 /* Spotlight Effect */
@@ -50,21 +96,26 @@ body {
   transition: opacity 0.3s;
   background: radial-gradient(
     600px circle at var(--x) var(--y),
-    rgba(196, 192, 255, 0.06),
+    rgba(196, 192, 255, 0.08),
     transparent 80%
   );
 }
 
-/* Section Connections */
+/* Theme-aware grid lines */
 .grid-lines {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Bento Enhancements */
+/* Bento Enhancements - Theme aware */
 .bento-card {
-  @apply bg-surface-container/60 backdrop-blur-md rounded-2xl border border-white/5 p-6 transition-all duration-500 overflow-hidden relative;
+  background-color: var(--surface-container);
+  @apply backdrop-blur-md rounded-[32px] border border-main p-6 transition-all duration-500 overflow-hidden relative shadow-sm;
+}
+
+[data-theme="dark"] .bento-card {
+  @apply bg-surface-container/60;
 }
 
 .bento-card::before {

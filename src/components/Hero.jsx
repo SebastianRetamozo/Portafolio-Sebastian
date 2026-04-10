@@ -39,7 +39,7 @@ const Hero = () => {
 
           <motion.h1 
             variants={itemVariants}
-            className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-white"
+            className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-main"
           >
             Experiencia <br /> Digital de <br /> 
             <span className="text-gradient italic font-extrabold pr-4 flex items-center gap-4">
@@ -54,9 +54,9 @@ const Hero = () => {
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-xl font-medium"
+            className="text-lg md:text-xl text-dim leading-relaxed max-w-xl font-medium"
           >
-            Hola, soy <span className="text-white">Sebastián Retamozo</span>. Construyo sistemas de alto rendimiento y soluciones digitales escalables. Desarrollador Fullstack Trainee con especial enfoque en Backend.
+            Hola, soy <span className="text-main font-bold">Sebastián Retamozo</span>. Construyo sistemas de alto rendimiento y soluciones digitales escalables. Desarrollador Fullstack Trainee con especial enfoque en Backend.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-6 pt-4">
@@ -67,7 +67,7 @@ const Hero = () => {
               </a>
             </Magnetic>
             <Magnetic>
-              <button className="px-10 py-5 font-black uppercase text-[11px] tracking-widest rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+              <button className="px-10 py-5 font-black uppercase text-[11px] tracking-widest rounded-xl border border-main hover:bg-primary/5 transition-colors text-main">
                 Descargar CV
               </button>
             </Magnetic>
@@ -80,7 +80,7 @@ const Hero = () => {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="hidden lg:block relative"
         >
-          <div className="bg-surface-container/40 backdrop-blur-xl p-10 rounded-3xl border border-white/5 shadow-3xl relative z-10 overflow-hidden group">
+          <div className="bg-card backdrop-blur-xl p-10 rounded-[32px] border border-main shadow-2xl relative z-10 overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
             <div className="flex gap-2.5 mb-8">
@@ -89,8 +89,8 @@ const Hero = () => {
               <div className="w-3 h-3 rounded-full bg-[#27C93F] shadow-lg shadow-[#27C93F]/20"></div>
             </div>
 
-            <div className="font-mono text-sm space-y-3">
-              <p className="flex gap-4"><span className="text-secondary opacity-50 italic">01</span><span><span className="text-secondary">clase</span> <span className="text-primary-fixed">Desarrollador</span> {'{'}</span></p>
+            <div className="font-mono text-sm space-y-3 text-main">
+              <p className="flex gap-4"><span className="text-secondary opacity-50 italic">01</span><span><span className="text-secondary font-bold">clase</span> <span className="text-primary-fixed">Desarrollador</span> {'{'}</span></p>
               <p className="flex gap-4"><span className="text-secondary opacity-50 italic">02</span><span className="pl-4">constructor() {'{'}</span></p>
               <p className="flex gap-4"><span className="text-secondary opacity-50 italic">03</span><span className="pl-8">this.nombre = <span className="text-primary-fixed">"Sebastián"</span>;</span></p>
               <p className="flex gap-4"><span className="text-secondary opacity-50 italic">04</span><span className="pl-8">this.enfoque = [<span className="text-primary-fixed">"Escalabilidad"</span>, <span className="text-primary-fixed">"UX"</span>];</span></p>

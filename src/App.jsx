@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import BentoSection from './components/BentoSection';
@@ -32,11 +32,19 @@ const projects = [
 ];
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
   return (
-    <div className="bg-background min-h-screen text-on-background selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen text-on-background selection:bg-primary/30 selection:text-white transition-colors duration-500">
       <div className="noise-overlay" />
       <Spotlight />
-      <Navbar />
+      <Navbar toggleTheme={toggleTheme} theme={theme} />
       
       <main className="relative z-20">
         <Hero />
@@ -54,7 +62,7 @@ function App() {
               >
                 <span className="text-[10px] uppercase font-black tracking-widest text-primary">Proyectos Destacados</span>
               </motion.div>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white">Sistemas en <br /> <span className="text-gradient font-black italic">Producción Real</span></h2>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-main">Sistemas en <br /> <span className="text-gradient font-black italic pr-4">Producción Real</span></h2>
               <p className="text-on-surface-variant text-lg font-medium leading-relaxed">
                 Una selección de soluciones técnicas diseñadas con un enfoque en la escalabilidad, la arquitectura limpia y la mejor experiencia de usuario.
               </p>
@@ -68,53 +76,118 @@ function App() {
           </div>
         </section>
 
-        {/* Contacto Final */}
-        <section id="contact" className="py-60 px-8 relative overflow-hidden bg-surface-container-lowest">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[150px] -z-10" />
-          <div className="max-w-4xl mx-auto text-center space-y-16">
-            <div className="space-y-8">
-              <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-white">¿Construimos <br /> <span className="text-gradient">el futuro?</span></h2>
-              <p className="text-xl md:text-2xl text-on-surface-variant leading-relaxed font-medium">
-                Estoy buscando mi primer desafío corporativo donde pueda aportar mi agilidad y base técnica. <br className="hidden md:block"/> Siempre en busca de soluciones eficientes y escalables.
-              </p>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-10">
-                <a 
-                  href="mailto:sebastian.retamozo0210@gmail.com" 
-                  className="text-white font-black uppercase text-xs tracking-[0.3em] hover:text-primary transition-all relative group"
+        {/* Sección de Contacto Renovada */}
+        <section id="contact" className="py-40 px-8 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 blur-[120px] rounded-full -z-10" />
+          
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              
+              {/* Bloque Izquierdo: Texto e Impacto */}
+              <div className="space-y-10">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                 >
-                  Email
-                  <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500" />
-                </a>
-                <a 
-                  href="https://linkedin.com/in/sebastianretamozo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white font-black uppercase text-xs tracking-[0.3em] hover:text-primary transition-all relative group"
-                >
-                  LinkedIn
-                  <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500" />
-                </a>
-                <a 
-                  href="https://github.com/SebastianRetamozo?tab=repositories" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white font-black uppercase text-xs tracking-[0.3em] hover:text-primary transition-all relative group"
-                >
-                  GitHub
-                  <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500" />
-                </a>
-            </div>
+                  <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-main leading-tight">
+                    ¿Listo para <br />
+                    <span className="text-gradient">conectar?</span>
+                  </h2>
+                </motion.div>
+                
+                <p className="text-xl md:text-2xl text-on-surface-variant leading-relaxed font-medium max-w-xl">
+                  Estoy buscando mi primer desafío corporativo. Si buscas a alguien con agilidad técnica y hambre de aprender, escríbeme.
+                </p>
 
-            <div className="pt-12">
-               <motion.button 
-                 whileHover={{ scale: 0.98 }}
-                 whileTap={{ scale: 0.95 }}
-                 className="bg-primary text-on-primary px-16 py-6 font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl shadow-2xl shadow-primary/30"
-               >
-                 Enviar Mensaje
-               </motion.button>
+                <div className="flex flex-wrap gap-4">
+                  <motion.a 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://wa.me/51935270506?text=Hola%20Sebasti%C3%A1n%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative px-10 py-5 bg-[#25D366] text-white font-black uppercase tracking-[0.2em] text-[11px] rounded-2xl shadow-[0_20px_50px_rgba(37,211,102,0.3)] flex items-center gap-3"
+                  >
+                    <span className="material-symbols-outlined text-lg">chat</span>
+                    Hablemos por WhatsApp
+                  </motion.a>
+                  
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-5 bg-white/5 text-white border border-white/10 font-black uppercase tracking-[0.2em] text-[11px] rounded-2xl backdrop-blur-md hover:bg-white/10 transition-all"
+                  >
+                    Descargar CV
+                  </motion.button>
+                </div>
+              </div>
+
+              {/* Bloque Derecho: Hub de Enlaces (Magnet Grid) */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="bg-surface-container/30 backdrop-blur-2xl p-10 md:p-16 rounded-[40px] border border-white/10 space-y-12 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-3xl -z-10 group-hover:w-60 group-hover:h-60 transition-all duration-700" />
+                  
+                  <div className="space-y-2">
+                    <span className="text-primary font-black uppercase text-[10px] tracking-[0.4em]">Canales Digitales</span>
+                    <h3 className="text-4xl font-black text-main italic">Direct Channels</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-6">
+                    {/* LinkedIn */}
+                    <a href="https://linkedin.com/in/sebastianretamozo" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 p-5 md:p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/50 transition-all group/item overflow-hidden">
+                       <div className="w-12 h-12 flex-shrink-0 bg-white/5 rounded-xl flex items-center justify-center group-hover/item:bg-primary transition-colors text-white">
+                         <span className="material-symbols-outlined text-2xl">link</span>
+                       </div>
+                       <div className="min-w-0">
+                         <p className="text-[10px] text-on-surface-variant font-black uppercase tracking-widest">LinkedIn</p>
+                         <p className="text-main font-bold truncate">@sebastianretamozo</p>
+                       </div>
+                    </a>
+
+                    {/* GitHub */}
+                    <a href="https://github.com/SebastianRetamozo" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 p-5 md:p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/50 transition-all group/item overflow-hidden">
+                       <div className="w-12 h-12 flex-shrink-0 bg-white/5 rounded-xl flex items-center justify-center group-hover/item:bg-primary transition-colors text-white">
+                         <span className="material-symbols-outlined text-2xl">terminal</span>
+                       </div>
+                       <div className="min-w-0">
+                         <p className="text-[10px] text-on-surface-variant font-black uppercase tracking-widest">GitHub</p>
+                         <p className="text-main font-bold truncate">@SebastianRetamozo</p>
+                       </div>
+                    </a>
+
+                    {/* Email Copy Card */}
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText('sebastian.retamozo0210@gmail.com');
+                        const btn = document.getElementById('copy-indicator');
+                        btn.innerText = '¡COPIADO!';
+                        setTimeout(() => btn.innerText = 'COPIAR EMAIL', 2000);
+                      }}
+                      className="flex items-center justify-between gap-5 p-5 md:p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/50 transition-all group/item overflow-hidden"
+                    >
+                       <div className="flex items-center gap-5 min-w-0">
+                         <div className="w-12 h-12 flex-shrink-0 bg-white/5 rounded-xl flex items-center justify-center group-hover/item:bg-primary transition-colors text-white">
+                           <span className="material-symbols-outlined text-2xl">alternate_email</span>
+                         </div>
+                         <div className="text-left min-w-0">
+                           <p className="text-[10px] text-on-surface-variant font-black uppercase tracking-widest">Email Corporativo</p>
+                           <p className="text-main font-bold truncate text-sm md:text-base">sebastian.retamozo0210@gmail.com</p>
+                         </div>
+                       </div>
+                       <span id="copy-indicator" className="flex-shrink-0 text-[8px] font-black text-primary tracking-widest bg-primary/10 px-4 py-2 rounded-full group-hover/item:bg-primary group-hover/item:text-on-primary transition-all uppercase whitespace-nowrap">
+                         COPIAR
+                       </span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+
             </div>
           </div>
         </section>
@@ -122,7 +195,7 @@ function App() {
 
       <footer className="w-full py-20 bg-background border-t border-white/5 relative z-30">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="text-xl font-black text-white">SEBASTIÁN <span className="text-primary">RETAMOZO</span></div>
+          <div className="text-xl font-black text-main">SEBASTIÁN <span className="text-primary font-black italic">RETAMOZO</span></div>
           <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-on-surface-variant">
             © {new Date().getFullYear()} · Hecho con precisión técnica en Lima, Perú
           </p>
