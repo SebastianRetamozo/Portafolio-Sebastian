@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-background text-on-background font-body;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Custom Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.03;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* Modern Typography Utilities */
+.text-reveal {
+  @apply opacity-0 translate-y-4 blur-sm;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-reveal.active {
+  @apply opacity-100 translate-y-0 blur-0;
+}
+
+/* Gradient text */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-secondary;
+}
+
+/* Spotlight Effect */
+.spotlight {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  transition: opacity 0.3s;
+  background: radial-gradient(
+    600px circle at var(--x) var(--y),
+    rgba(196, 192, 255, 0.06),
+    transparent 80%
+  );
+}
+
+/* Section Connections */
+.grid-lines {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Bento Enhancements */
+.bento-card {
+  @apply bg-surface-container/60 backdrop-blur-md rounded-2xl border border-white/5 p-6 transition-all duration-500 overflow-hidden relative;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(196, 192, 255, 0.05), transparent 80%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+/* Animation utilities */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
+}
